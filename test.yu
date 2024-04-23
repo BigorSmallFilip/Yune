@@ -1,0 +1,11 @@
+
+print("Hello, world!")
+
+
+
+function bregh(n)
+	print("Beginning bregh")
+	for i = 0, n
+		print(i)
+	print("Bregh finished")
+
