@@ -5,7 +5,9 @@
 
 typedef struct
 {
+	size_t current_value_memory; /* Amount of memory being used to store values */
 	size_t max_value_memory; /* The maximum amount of memory allowed for storing values */
+	int tabsize; /* The number of spaces which make up a tab */
 } Yu_State;
 
 Yu_State* Yu_CreateState();

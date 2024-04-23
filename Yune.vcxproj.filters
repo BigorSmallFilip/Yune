@@ -27,6 +27,12 @@
     <ClCompile Include="yu_code.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="yu_parse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="yu_tokenize.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="yu_utility.h">
@@ -39,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="yu_code.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="yu_parse.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

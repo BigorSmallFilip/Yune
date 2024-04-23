@@ -4,6 +4,8 @@ Yu_State* Yu_CreateState()
 {
 	Yu_State* state = Yu_AllocType(Yu_State);
 	if (!state) return NULL;
-	state->max_value_memory = 4096;
+	state->current_value_memory = 0;
+	state->max_value_memory = 1;
+	state->tabsize = 4;
 	return state;
 }
