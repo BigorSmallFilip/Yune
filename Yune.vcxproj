@@ -140,6 +140,7 @@
     <ClInclude Include="yu_parse.h" />
     <ClInclude Include="yu_state.h" />
     <ClInclude Include="yu_utility.h" />
+    <ClInclude Include="yu_value.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="test.yu" />

@@ -168,10 +168,10 @@ typedef struct Yu_ExprNode
 		struct
 		{
 			char num_components; /* 2, 3 or 4 */
+			struct Yu_ExprNode* comp0;
 			struct Yu_ExprNode* comp1;
 			struct Yu_ExprNode* comp2;
 			struct Yu_ExprNode* comp3;
-			struct Yu_ExprNode* comp4;
 		} u_vector;
 		struct
 		{
@@ -204,7 +204,7 @@ typedef struct Yu_ExprNode
 typedef struct
 {
 	char* key;
-	Yu_Hash keyhash;
+	Yu_Hash hash;
 	Yu_ExprNode* value;
 } Yu_ExprObjectMember;
 

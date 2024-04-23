@@ -50,6 +50,9 @@
     <ClInclude Include="yu_parse.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="yu_value.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="test.yu">
