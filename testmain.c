@@ -5,7 +5,7 @@
 
 int main(int argc, char** argv)
 {
-	printf("Yune programming language test\n");
+	printf("Yune programming language test but here??\n");
 
 	Yu_State* state = Yu_CreateState();
 	if (!state) return 1;
