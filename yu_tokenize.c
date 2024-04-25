@@ -59,9 +59,12 @@ static Yu_Token* create_token()
 
 Yu_Bool Yu_TokenizeSourceCode(Yu_ParserState* parser)
 {
-	for (int i = 128; i < 256; i++)
+	printf("Valid chars:\n");
+	for (int i = 6; i < 256; i++)
 	{
-		printf("%i > %c > %i\n", i, (char)i, check_chartype((char)i));
+		chartype t = check_chartype((char)i);
+		if (t != CT_NULL)
+			printf("%i > %c : %i\n", i, (char)i, t);
 	}
 	return Yu_FALSE;
 
