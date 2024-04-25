@@ -20,6 +20,7 @@ enum
 typedef struct
 {
 	char* str;
+	Yu_Size length;
 	Yu_Hash hash;
 	Yu_Vector format; /* Vector of Yu_ExprNodes for each format expression in the string */
 } Yu_FormatString;

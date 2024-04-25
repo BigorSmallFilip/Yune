@@ -57,6 +57,62 @@ static Yu_Token* create_token()
 
 
 
+#define syntax_error(format, ...)    \
+	Yu_PushStateMessage(         \
+	parser->main_state,          \
+	Yu_MSGT_SYNTAXERROR,         \
+	parser->linenum,             \
+	parser->sourcecode_filename, \
+	format,                      \
+	__VA_ARGS__);                \
+        parser->errorcount++
+#define syntax_error(format, ...) void
+
+
+
+static Yu_Token* read_alpha_token(Yu_ParserState* parser)
+{
+	int start = parser->charpos;
+	int end = -1;
+	for (int i = start + 1; i < parser->max_sourcecode_length; i++)
+	{
+		char c = parser->sourcecode[i];
+		if (is_alpha(c) || isdigit(c))
+			continue;
+		else
+		{
+			end = i;
+			break;
+		}
+		
+	}
+	Yu_Token* token = create_token();
+	if (!token) goto fail_0;
+	char* cutstring = Yu_CopyCutString(parser->sourcecode, start, end - start);
+	if (!cutstring) goto fail_1;
+	token->keywordid = Yu_GetKeyword(cutstring);
+	if (token->keywordid == Yu_KW_NULL)
+	{
+		token->type = Yu_TT_IDENTIFIER;
+		token->string = cutstring;
+	} else
+	{
+		token->type = Yu_TT_KEYWORD;
+		token->string = NULL;
+		Yu_Free(cutstring); /* Keyword doesn't need the string */
+	}
+	parser->charpos = end;
+	return token;
+
+fail_1:
+	Yu_Free(token);
+fail_0:
+	parser->charpos = end;
+	return NULL;
+}
+
+
+
 Yu_Bool Yu_TokenizeSourceCode(Yu_ParserState* parser)
 {
 	printf("Valid chars:\n");

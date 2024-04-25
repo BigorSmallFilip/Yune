@@ -65,3 +65,15 @@ void* Yu_PopBackVector(Yu_Vector* vector)
 	}
 	return item;
 }
+
+
+
+char* Yu_CopyCutString(const char* srcstring, Yu_Size start, Yu_Size length)
+{
+	char* str = Yu_Malloc(length + 1); /* Plus 1 to include null terminator */
+	if (!str) return NULL;
+	for (int i = 0; i < length; i++)
+		str[i] = srcstring[i + start];
+	str[length] = '\0';
+	return str;
+}

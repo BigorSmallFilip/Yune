@@ -106,4 +106,21 @@ typedef struct
 	Yu_Hash hash;
 } Yu_String;
 
+
+
+/*
+** @brief Copies part of a string and returns a new string of that.
+** @param srcstring String to copy from.
+** @param start Where in the srcstring to start.
+** @param length The length of the part to copy.
+** @return Pointer to the new string, remember to free!
+*/
+char* Yu_CopyCutString(
+	const char* srcstring,
+	Yu_Size start,
+	Yu_Size length
+);
+
+
+
 #endif
