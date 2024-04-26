@@ -58,5 +58,8 @@
     <None Include="test.yu">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="yune-0.0.1.vsix">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

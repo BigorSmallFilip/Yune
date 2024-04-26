@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="test.yu" />
+    <None Include="yune-0.0.1.vsix" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
