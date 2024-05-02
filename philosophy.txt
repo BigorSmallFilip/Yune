@@ -1,0 +1,21 @@
+
+
+
+Indentation:
+
+if true
+	print('true')
+
+if true:  print('true')
+if false: print('false')
+
+if a++: a = b ++i
+
+':' necessary to enter new block on same line
+';' necessary to make new statement on same line
+
+
+
+if a == true: print('guh')
+	print('also in block')
+else
