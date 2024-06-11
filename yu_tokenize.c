@@ -18,6 +18,38 @@ typedef enum
 	CT_ENDLINE,
 } chartype;
 
+#define USE_CHARTYPE_LUT
+
+#ifdef USE_CHARTYPE_LUT
+
+const unsigned char chartype_lut[256] =
+{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 9, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 4, 7, 8, 0, 0, 4, 7, 5, 5, 4, 4, 5, 4, 3, 4,
+	2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 9, 4, 4, 4, 0,
+	0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 0, 5, 0, 1,
+	0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 4, 5, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+};
+
+#define is_alpha(c) (chartype_lut[(c)] == CT_ALPHA)
+#define is_operator_char(c) (chartype_lut[(c)] == CT_OPERATOR)
+#define is_separator_char(c) (chartype_lut[(c)] == CT_SEPARATOR)
+#define is_quote_char(c) (chartype_lut[(c)] == CT_QUOTE)
+#define is_invalid(c) (chartype_lut[(c)] == CT_NULL)
+
+#else
+
 #define is_alpha(c) (isalpha(c) || c == '_')
 #define is_operator_char(c) (strchr("+-/*=<>!&|", c))
 #define is_separator_char(c) (strchr("()[]{},", c))
@@ -26,7 +58,6 @@ typedef enum
 
 static chartype check_chartype(const char c)
 {
-	Yu_Assert(c != 0);
 	if (c < 0)                 return CT_NULL;
 	if (is_alpha(c))           return CT_ALPHA;
 	if (isdigit(c))            return CT_NUMBER;
@@ -39,6 +70,10 @@ static chartype check_chartype(const char c)
 	if (c == '#')              return CT_COMMENT;
 	return CT_NULL;
 }
+
+#endif
+
+
 
 static Yu_Token* create_token()
 {
@@ -115,14 +150,18 @@ fail_0:
 
 Yu_Bool Yu_TokenizeSourceCode(Yu_ParserState* parser)
 {
-	printf("Valid chars:\n");
-	for (int i = 6; i < 256; i++)
+	// This code generates the lut for the chartypes
+	/*printf("The lookup table:\n");
+	for (int i = 0; i < 128; i += 16)
 	{
-		chartype t = check_chartype((char)i);
-		if (t != CT_NULL)
-			printf("%i > %c : %i\n", i, (char)i, t);
+		for (int j = 0; j < 16; j++)
+		{
+			chartype t = check_chartype((char)(i + j));
+			printf("%i, ", (int)t);
+		}
+		putchar('\n');
 	}
-	return Yu_FALSE;
+	return Yu_FALSE;*/
 
 	parser->charpos = 0;
 	parser->linenum = 1;
